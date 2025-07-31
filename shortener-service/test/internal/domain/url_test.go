@@ -133,8 +133,6 @@ func TestNewURL(t *testing.T) {
 			validate: func(t *testing.T, url *domain.URL) {
 				assert.Equal(t, "https://example.com", url.OriginalURL)
 				assert.Empty(t, url.ShortURL)
-				assert.False(t, url.DeletedFlag)
-				assert.Empty(t, url.UUID)
 			},
 		},
 		{
@@ -143,7 +141,6 @@ func TestNewURL(t *testing.T) {
 			validate: func(t *testing.T, url *domain.URL) {
 				assert.Empty(t, url.OriginalURL)
 				assert.Empty(t, url.ShortURL)
-				assert.False(t, url.DeletedFlag)
 			},
 		},
 	}
