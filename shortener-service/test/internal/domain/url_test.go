@@ -152,9 +152,3 @@ func TestNewURL(t *testing.T) {
 		})
 	}
 }
-
-type errorReader struct{}
-
-func (r *errorReader) Read(p []byte) (n int, err error) {
-	return 0, assert.AnError
-}
