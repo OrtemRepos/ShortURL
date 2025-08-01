@@ -11,9 +11,9 @@ import (
 )
 
 var (
-	ErrURLNotFound     = errors.New("url not found")
-	ErrURLNil          = errors.New("url cannot be nil")
-	ErrShortURLEmpty   = errors.New("shortURL cannot be empty")
+	ErrURLNotFound      = errors.New("url not found")
+	ErrURLNil           = errors.New("url cannot be nil")
+	ErrShortURLEmpty    = errors.New("shortURL cannot be empty")
 	ErrOriginalURLEmpty = errors.New("originalURL cannot be empty")
 )
 

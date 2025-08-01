@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/go-redis/redismock/v9"
 	"github.com/OrtemRepos/shortener-service/internal/domain"
 	"github.com/OrtemRepos/shortener-service/internal/repository"
+	"github.com/go-redis/redismock/v9"
 	"github.com/redis/go-redis/v9"
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/zap/zaptest"
@@ -34,7 +34,7 @@ func TestRedisURLRepo_Save(t *testing.T) {
 				ShortURL:    shortURL,
 				OriginalURL: originalURL,
 			},
-			expTime: expTime,
+			expTime:   expTime,
 			setupMock: true,
 			mockSetup: func(mock redismock.ClientMock) {
 				mock.ExpectSet(shortURL, originalURL, expTime).SetVal("OK")
@@ -54,7 +54,7 @@ func TestRedisURLRepo_Save(t *testing.T) {
 				ShortURL:    shortURL,
 				OriginalURL: originalURL,
 			},
-			expTime: expTime,
+			expTime:   expTime,
 			setupMock: true,
 			mockSetup: func(mock redismock.ClientMock) {
 				mock.ExpectSet(shortURL, originalURL, expTime).SetErr(redis.ErrClosed)
