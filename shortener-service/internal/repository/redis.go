@@ -11,7 +11,10 @@ import (
 )
 
 var (
-	ErrURLNotFound = errors.New("url not found")
+	ErrURLNotFound     = errors.New("url not found")
+	ErrURLNil          = errors.New("url cannot be nil")
+	ErrShortURLEmpty   = errors.New("shortURL cannot be empty")
+	ErrOriginalURLEmpty = errors.New("originalURL cannot be empty")
 )
 
 type RedisURLRepo struct {
@@ -28,7 +31,14 @@ func NewRedisURLRepo(client *redis.Client, logger *zap.Logger) *RedisURLRepo {
 
 func (r *RedisURLRepo) Save(ctx context.Context, url *domain.URL, expTime time.Duration) error {
 	if url == nil {
-		return errors.New("url cannot be nil")
+		return ErrURLNil
+	}
+
+	if url.ShortURL == "" {
+		return ErrShortURLEmpty
+	}
+	if url.OriginalURL == "" {
+		return ErrOriginalURLEmpty
 	}
 
 	if err := r.client.Set(ctx, url.ShortURL, url.OriginalURL, expTime).Err(); err != nil {
@@ -45,7 +55,7 @@ func (r *RedisURLRepo) Save(ctx context.Context, url *domain.URL, expTime time.D
 
 func (r *RedisURLRepo) Get(ctx context.Context, shortURL string) (*domain.URL, error) {
 	if shortURL == "" {
-		return nil, errors.New("shortURL cannot be empty")
+		return nil, ErrShortURLEmpty
 	}
 
 	originalURL, err := r.client.Get(ctx, shortURL).Result()
@@ -72,7 +82,7 @@ func (r *RedisURLRepo) Get(ctx context.Context, shortURL string) (*domain.URL, e
 
 func (r *RedisURLRepo) Delete(ctx context.Context, shortURL string) error {
 	if shortURL == "" {
-		return errors.New("shortURL cannot be empty")
+		return ErrShortURLEmpty
 	}
 
 	if err := r.client.Del(ctx, shortURL).Err(); err != nil {
