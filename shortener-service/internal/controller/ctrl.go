@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/OrtemRepos/shortener-service/internal/domain"
+	"github.com/OrtemRepos/ShortURL/shortener-service/internal/domain"
 	"go.uber.org/zap"
 )
 

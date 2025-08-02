@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/OrtemRepos/shortener-service/internal/domain"
-	"github.com/OrtemRepos/shortener-service/internal/repository"
+	"github.com/OrtemRepos/ShortURL/shortener-service/internal/domain"
+	"github.com/OrtemRepos/ShortURL/shortener-service/internal/repository"
 	"github.com/go-redis/redismock/v9"
 	"github.com/redis/go-redis/v9"
 	"github.com/stretchr/testify/assert"

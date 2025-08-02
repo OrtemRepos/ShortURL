@@ -5,7 +5,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/OrtemRepos/shortener-service/internal/domain"
+	"github.com/OrtemRepos/ShortURL/shortener-service/internal/domain"
 	"github.com/redis/go-redis/v9"
 	"go.uber.org/zap"
 )
