@@ -1,0 +1,48 @@
+syntax = "proto3";
+package url_service.v1;
+
+option go_package = "github.com/OrtemRepos/ShortURL/shortener-service/gen/url";
+
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/duration.proto";
+
+message URL {
+  string short_url = 1;
+  string original_url = 2;
+}
+
+message OriginalURL {
+  string url = 1;
+}
+
+message ShortURL {
+  string url = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+service ShortenerService {
+  rpc GetOriginalURL(ShortURL) returns (OriginalURL) {
+    option (google.api.http) = {
+      get: "/v1/{url=*}"
+    };
+  }
+
+  rpc GenerateShortURL(GenerateShortURLRequest) returns (URL) {
+    option (google.api.http) = {
+      post: "/v1/generate"
+      body: "*"
+    };
+  }
+
+  rpc DeleteShortURL(ShortURL) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/{url=*}"
+    };
+  }
+}
+
+message GenerateShortURLRequest {
+  string original_url = 1 [(google.api.field_behavior) = REQUIRED];
+  google.protobuf.Duration ttl = 2;
+}
