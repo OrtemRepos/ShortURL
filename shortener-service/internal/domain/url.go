@@ -29,9 +29,9 @@ func (u *URL) GenerateShortURL() string {
 	return u.ShortURL
 }
 
-func NewURL(longURL string) *URL {
+func NewURL(originalURL string) *URL {
 	return &URL{
-		OriginalURL: longURL,
+		OriginalURL: originalURL,
 		ShortURL:    "",
 	}
 }
