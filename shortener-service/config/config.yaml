@@ -1,0 +1,11 @@
+app:
+  name: "My Redis App"
+  env: "development"
+  port: 8080
+
+redis:
+  host: "localhost"
+  port: 6379
+  password: ""
+  db: 0
+  pool_size: 10
